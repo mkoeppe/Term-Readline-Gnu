@@ -74,24 +74,8 @@ if ($Config{osname} eq 'os2') {
         }
     }
 
-    # Search libtermcap, libtinfo, libncurses, or libcurses in this order.
-    # I emulate the behavior of the configure script for bash, and don't
-    # know why AIX prefers curses.
-    # libtermcap.a on HPUX cannot be used for dynamically linked binary.
-    # Old Cygwin may require setting false (0).
-    # tinfo is for Debian. [Debian Bug Report #644423]
-    my $PREFER_CURSES = $Config{osname} eq 'aix' || $Config{osname} eq 'hpux'
-			|| $Config{osname} eq 'cygwin';
-    my $TERMCAP_LIB = (! $PREFER_CURSES && &search_lib('-ltermcap'))
-	|| &search_lib('-ltinfo')
-	|| &search_lib('-lncurses')
-	|| &search_lib('-lcurses');
+    my $TERMCAP_LIB = '-lncurses';
 
-    unless ($TERMCAP_LIB) {
-	warn "Could not find neither libtermcap, libtinfo, libncurses, or libcurses.\n";
-	exit $err;
-    } 
- 
     $libs = "-lreadline $TERMCAP_LIB";
     # Latest Perl in FreeBSD does not need this hack. (Dec.2002)
     $libs .= ' -lcrypt' if ($Config{osname} =~ /freebsd/i);
