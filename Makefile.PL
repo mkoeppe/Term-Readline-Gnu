@@ -131,7 +131,7 @@ WriteMakefile
       (
        IMPORTS	  => { xfree => 'emxlibcm.401' }, # Yuck!
       ) : () ),
-     INC	  => "$RLINC $CFLAGS",
+     INC	  => "$RLINC $ENV{CFLAGS}",
      dist	  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz' },
      clean	  => { FILES => "rlver.c rlver$Config{_exe} rlmalloc.c rlmalloc$Config{_exe}" },
 );
