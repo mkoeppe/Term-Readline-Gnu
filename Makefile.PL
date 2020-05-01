@@ -123,7 +123,7 @@ WriteMakefile
      },
      VERSION_FROM => 'Gnu.pm',
      MIN_PERL_VERSION => '5.8.1',
-     LIBS	  => [ "$RLLIB $libs" ],
+     LIBS	  => [ "$RLLIB $ENV{LDFLAGS} $libs" ],
      LDDLFLAGS	  => "$RLLIB $Config{lddlflags} $ENV{LDFLAGS}",
      dynamic_lib  => { OTHERLDFLAGS => $lddflags },
      DEFINE	  => $defs,
